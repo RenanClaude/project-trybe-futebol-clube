@@ -9,9 +9,8 @@ import db from '.';
 
 class TeamsModel extends Model<InferAttributes<TeamsModel>,
 InferCreationAttributes<TeamsModel>> {
-
   declare id: CreationOptional<number>;
-  declare team_name: string;
+  declare teamName: string;
 }
 
 TeamsModel.init({
@@ -21,7 +20,7 @@ TeamsModel.init({
     primaryKey: true,
     autoIncrement: true,
   },
-  team_name: {
+  teamName: {
     type: DataTypes.STRING(30),
     allowNull: false,
   },
