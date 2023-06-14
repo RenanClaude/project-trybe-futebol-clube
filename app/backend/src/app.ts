@@ -20,6 +20,8 @@ class App {
       next();
     };
 
+    // this.app.get('/teams');
+
     this.app.use(express.json());
     this.app.use(accessControl);
   }
