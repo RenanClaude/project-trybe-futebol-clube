@@ -40,22 +40,28 @@ describe('Seu teste', () => {
   //   expect(...)
   // });
 
+  beforeEach(function () { sinon.restore(); });
+
   it('Should return all teams', async function() {
-    sinon.stub(SequelizeTeams, 'findAll').resolves(teams as any);
+    // Para simular a estrutura por completo que o this.model  deveria retornar - incluindo o dataValues que vc tenta acessar - basta fazer um build  ao mockar o valor. (linha abaixo)
+    const teamMock = SequelizeTeams.build(team)
+    sinon.stub(SequelizeTeams, 'findAll').resolves([teamMock]);
 
     const { status, body } = await chai.request(app).get('/teams');
 
     expect(status).to.equal(200);
-    // expect(body).to.deep.equal(teams);
+    expect(body).to.deep.equal(teams);
   });
 
   it('Should return a team by id', async function() {
-    sinon.stub(SequelizeTeams, 'findByPk').resolves(team as any);
+    // Para simular a estrutura por completo que o this.model  deveria retornar - incluindo o dataValues que vc tenta acessar - basta fazer um build  ao mockar o valor. (linha abaixo)
+    const teamMock = SequelizeTeams.build(team)
+    sinon.stub(SequelizeTeams, 'findByPk').resolves(teamMock);
 
     const { status, body } = await chai.request(app).get('/teams/1');
 
     expect(status).to.equal(200);
-    // expect(body).to.deep.equal(team);
+    expect(body).to.deep.equal(team);
   });
 
   // it('Should return null because of the invalid id', async function() {
