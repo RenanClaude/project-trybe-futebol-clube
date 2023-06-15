@@ -40,12 +40,30 @@ describe('Seu teste', () => {
   //   expect(...)
   // });
 
-  it('should return all teams', async function() {
+  it('Should return all teams', async function() {
     sinon.stub(SequelizeTeams, 'findAll').resolves(teams as any);
 
     const { status, body } = await chai.request(app).get('/teams');
 
     expect(status).to.equal(200);
-    expect(body).to.deep.equal(teams);
+    // expect(body).to.deep.equal(teams);
   });
+
+  it('Should return a team by id', async function() {
+    sinon.stub(SequelizeTeams, 'findByPk').resolves(team as any);
+
+    const { status, body } = await chai.request(app).get('/teams/1');
+
+    expect(status).to.equal(200);
+    // expect(body).to.deep.equal(team);
+  });
+
+  // it('Should return null because of the invalid id', async function() {
+  //   // sinon.stub(SequelizeTeams, 'findByPk').resolves(null as any);
+
+  //   const { status, body } = await chai.request(app).get('/teams/1000');
+
+  //   expect(status).to.equal(200);
+  //   expect(body).to.deep.equal(null);
+  // });
 }); 

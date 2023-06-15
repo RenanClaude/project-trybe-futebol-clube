@@ -1,6 +1,6 @@
 const team = {
   id: 1,
-  team_name: 'Fluminense',
+  teamName: 'Fluminense',
 };
 
 const teams = [team];
