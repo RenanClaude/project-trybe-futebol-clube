@@ -25,7 +25,11 @@ class App {
     this.app.use(express.json());
     this.app.use(accessControl);
 
+    // Endpoint - Requisito 3
     this.app.get('/teams', (req, res) => this.teamsController.getAllTeamsController(req, res));
+
+    // Endpoint - Requisito 5
+    this.app.get('/teams/:id', (req, res) => this.teamsController.getTeamByIdController(req, res));
   }
 
   public start(PORT: string | number): void {
