@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import { IUser } from '../Interfaces/IUser';
 
 export default class Token {
