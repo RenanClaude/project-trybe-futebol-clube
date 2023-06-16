@@ -64,12 +64,11 @@ describe('Seu teste', () => {
     expect(body).to.deep.equal(team);
   });
 
-  // it('Should return null because of the invalid id', async function() {
-  //   // sinon.stub(SequelizeTeams, 'findByPk').resolves(null as any);
+  it('Should return null because of the invalid id', async function() {
+    sinon.stub(SequelizeTeams, 'findByPk').resolves(null);
+    const { status, body } = await chai.request(app).get('/teams/10000');
 
-  //   const { status, body } = await chai.request(app).get('/teams/1000');
-
-  //   expect(status).to.equal(200);
-  //   expect(body).to.deep.equal(null);
-  // });
+    expect(status).to.equal(200);
+    expect(body).to.deep.equal(null);
+  });
 }); 
