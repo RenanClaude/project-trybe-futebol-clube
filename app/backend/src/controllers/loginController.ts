@@ -13,11 +13,12 @@ export default class LoginController {
   public async loginController(req: Request, res: Response) {
     const { email, password } = req.body;
     const user = await this.loginService.getUserByEmail(email);
-    if (!user) { return res.status(400).json(); }
+    if (!user) { return res.status(401).json({ message: 'Invalid email or password' }); }
 
     const passwordValidation = await this.encryptor.compare(password, user.password);
-    if (!passwordValidation) { return res.status(400).json(); }
-
+    if (!passwordValidation) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
     const userToken = await this.token.getToken(user);
     return res.status(200).json({ token: userToken });
   }
