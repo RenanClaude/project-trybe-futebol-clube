@@ -8,13 +8,13 @@ import { team, teams } from './mocks/teamsMocks'
 
 import { Response } from 'superagent';
 import SequelizeUsers from '../database/models/SequelizeUsers';
-import { userDb } from './mocks/usersMocks';
+import { testToken, userDb } from './mocks/usersMocks';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('Seu teste', () => {
+describe('Tests for login and token routes', () => {
   beforeEach(function () { sinon.restore(); });
 
   it('Should login successfully', async function() {
@@ -66,5 +66,32 @@ describe('Seu teste', () => {
     const response = await chai.request(app).post('/login').send(loginData);
 
     expect(response.status).to.equal(401);
+  });
+
+  it('In "login/role" the token should be validated and returned to the user\'s function successfully',
+   async function() {
+    const response = await chai.request(app).get('/login/role')
+  .set('authorization', testToken);
+
+    expect(response.status).to.equal(200);
+    expect(response.body).to.deep.equal({ role: "admin" });
+  });
+
+  it('In "login/role" if there is no token it should fail',
+   async function() {
+    const response = await chai.request(app).get('/login/role')
+  .set('authorization', '');
+
+    expect(response.status).to.equal(401);
+    expect(response.body).to.deep.equal({ message: 'Token not found' });
+  });
+
+  it('In "login/role" if the token is invalid it should fail',
+   async function() {
+    const response = await chai.request(app).get('/login/role')
+  .set('authorization', 'Invalid token here!');
+
+    expect(response.status).to.equal(401);
+    expect(response.body).to.deep.equal({ message: 'Token must be a valid token' });
   });
 }); 

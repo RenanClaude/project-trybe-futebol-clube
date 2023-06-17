@@ -6,3 +6,5 @@ export const userDb = {
   role: 'user',
   username: 'exampleName',
 };
+
+export const testToken: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODY5NTE0Nzh9.awNGS6z9CJT-6AFfOyEIeEbc7cgwuPjjrARnDDp3vr0'
