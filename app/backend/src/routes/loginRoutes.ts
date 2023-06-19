@@ -22,7 +22,8 @@ router.post(
 // Endpoint - Requisito 12
 router.get(
   '/role',
-  (req, res) => Token.tokenValidation(req, res),
+  (req, res, next) => Token.tokenValidation(req, res, next),
+  (req, res) => Token.getRole(req, res),
 );
 
 export default router;

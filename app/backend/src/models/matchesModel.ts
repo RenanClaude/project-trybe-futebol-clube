@@ -4,8 +4,8 @@ import SequelizeMatches from '../database/models/SequelizeMatches';
 export default class MatchesModel {
   private model = SequelizeMatches;
 
-  async findAll(numberInProgress: boolean | null) {
-    const inProgressFilter = numberInProgress === null ? {} : { inProgress: numberInProgress };
+  async findAll(boolInProgress: boolean | null) {
+    const inProgressFilter = boolInProgress === null ? {} : { inProgress: boolInProgress };
     const dbData = await this.model.findAll(
       { include: [{ model: SequelizeTeams, as: 'homeTeam', attributes: ['teamName'] },
         { model: SequelizeTeams, as: 'awayTeam', attributes: ['teamName'] },
@@ -24,6 +24,10 @@ export default class MatchesModel {
     }));
     return allMatches;
   }
+
+  async finishMatch(id: number): Promise<void> {
+    await this.model.update({ inProgress: false }, { where: { id } });
+  }
 }
 // const x = new MatchesModel();
-// x.findAll();
+// x.finishMatch(45);
