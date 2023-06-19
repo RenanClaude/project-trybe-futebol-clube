@@ -5,6 +5,7 @@ import {
   InferCreationAttributes,
   CreationOptional,
 } from 'sequelize';
+import { IHomeAndAwayTeam } from '../../Interfaces/IHomeTeam';
 import db from '.';
 import SequelizeTeams from './SequelizeTeams';
 
@@ -16,6 +17,8 @@ InferCreationAttributes<SequelizeMatches>> {
   declare awayTeamId: number;
   declare awayTeamGoals: number;
   declare inProgress: boolean;
+  declare homeTeam?: IHomeAndAwayTeam;
+  declare awayTeam?: IHomeAndAwayTeam;
 }
 
 SequelizeMatches.init({
@@ -52,6 +55,8 @@ SequelizeMatches.init({
   underscored: true,
 });
 
-SequelizeMatches.hasMany(SequelizeTeams);
+SequelizeMatches.belongsTo(SequelizeTeams, { foreignKey: 'homeTeamId', as: 'homeTeam' });
+SequelizeMatches.belongsTo(SequelizeTeams, { foreignKey: 'awayTeamId', as: 'awayTeam' });
+// SequelizeTeams.hasMany(SequelizeMatches);
 
 export default SequelizeMatches;

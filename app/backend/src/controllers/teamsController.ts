@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import TeamsService from '../sevices/teamsService';
-// import { ITeamsController } from '../Interfaces/Icontroller/ITeamsController';
 
 export default class TeamsController {
   constructor(private teamsService = new TeamsService()) {}
