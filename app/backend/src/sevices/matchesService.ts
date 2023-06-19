@@ -1,3 +1,4 @@
+import { IScore } from '../Interfaces/IScore';
 import { IMatches } from '../Interfaces/IMatches';
 import MatchesModel from '../models/matchesModel';
 
@@ -13,7 +14,7 @@ export default class MatchesService {
     await this.matchesModel.finishMatch(id);
   }
 
-  public async updateScoreService(id: number, score: object) {
+  public async updateScoreService(id: number, score: IScore) {
     await this.matchesModel.updateScore(id, score);
   }
 }
