@@ -26,4 +26,11 @@ router.patch(
   (req: Request, res: Response) => matchesController.updateScoreController(req, res),
 );
 
+// Endpoint - Requisito 20
+router.post(
+  '/',
+  (req: Request, res: Response, next: NextFunction) => Token.tokenValidation(req, res, next),
+  (req: Request, res: Response) => matchesController.createMatchController(req, res),
+);
+
 export default router;

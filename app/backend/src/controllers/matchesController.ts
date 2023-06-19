@@ -27,4 +27,9 @@ export default class MatchesController {
     await this.matchesService.updateScoreService(Number(Number(id)), req.body);
     return res.status(200).json({ message: 'Score updated successfully!' });
   }
+
+  public async createMatchController(req: Request, res: Response) {
+    const createdMatch = await this.matchesService.createMatchService(req.body);
+    return res.status(201).json(createdMatch);
+  }
 }
