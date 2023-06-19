@@ -1,5 +1,6 @@
 import SequelizeTeams from '../database/models/SequelizeTeams';
 import SequelizeMatches from '../database/models/SequelizeMatches';
+import { IScore } from '../Interfaces/IScore';
 
 export default class MatchesModel {
   private model = SequelizeMatches;
@@ -28,6 +29,14 @@ export default class MatchesModel {
   async finishMatch(id: number): Promise<void> {
     await this.model.update({ inProgress: false }, { where: { id } });
   }
+
+  async updateScore(id: number, score: IScore): Promise<void> {
+    const { homeTeamGoals, awayTeamGoals } = score;
+    await this.model.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+  }
 }
 // const x = new MatchesModel();
-// x.finishMatch(45);
+// x.updateScore(45, {
+//   homeTeamGoals: 7,
+//   awayTeamGoals: 0,
+// });

@@ -12,4 +12,8 @@ export default class MatchesService {
   public async finishMatchService(id: number) {
     await this.matchesModel.finishMatch(id);
   }
+
+  public async updateScoreService(id: number, score: object) {
+    await this.matchesModel.updateScore(id, score);
+  }
 }

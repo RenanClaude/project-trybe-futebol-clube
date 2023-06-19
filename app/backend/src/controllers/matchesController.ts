@@ -21,4 +21,10 @@ export default class MatchesController {
     await this.matchesService.finishMatchService(Number(id));
     return res.status(200).json({ message: 'Finished' });
   }
+
+  public async updateScoreController(req: Request, res: Response) {
+    const { id } = req.params;
+    await this.matchesService.updateScoreService(Number(Number(id)), req.body);
+    return res.status(200).json({ message: 'Score updated successfully!' });
+  }
 }

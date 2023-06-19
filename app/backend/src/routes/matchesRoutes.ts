@@ -19,4 +19,11 @@ router.patch(
   (req: Request, res: Response) => matchesController.finishMatchController(req, res),
 );
 
+// Endpoint - Requisito 18
+router.patch(
+  '/:id',
+  (req: Request, res: Response, next: NextFunction) => Token.tokenValidation(req, res, next),
+  (req: Request, res: Response) => matchesController.updateScoreController(req, res),
+);
+
 export default router;
