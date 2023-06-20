@@ -27,7 +27,7 @@ router.patch(
   (req: Request, res: Response) => matchesController.updateScoreController(req, res),
 );
 
-// Endpoint - Requisito 20
+// Endpoint - Requisitos 20 e 21
 router.post(
   '/',
   (req, res, next) => Token.tokenValidation(req, res, next),
