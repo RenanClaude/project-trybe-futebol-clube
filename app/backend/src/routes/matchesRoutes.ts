@@ -1,6 +1,7 @@
 import { Request, Router, Response, NextFunction } from 'express';
 import MatchesController from '../controllers/matchesController';
 import Token from '../middlewares/token';
+import MatchValidation from '../middlewares/matchValidation';
 
 const matchesController = new MatchesController();
 
@@ -29,8 +30,9 @@ router.patch(
 // Endpoint - Requisito 20
 router.post(
   '/',
-  (req: Request, res: Response, next: NextFunction) => Token.tokenValidation(req, res, next),
-  (req: Request, res: Response) => matchesController.createMatchController(req, res),
+  (req, res, next) => Token.tokenValidation(req, res, next),
+  (req, res, next) => MatchValidation.matchValidation(req, res, next),
+  (req, res) => matchesController.createMatchController(req, res),
 );
 
 export default router;

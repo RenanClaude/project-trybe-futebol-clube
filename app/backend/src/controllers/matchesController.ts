@@ -29,6 +29,15 @@ export default class MatchesController {
   }
 
   public async createMatchController(req: Request, res: Response) {
+    const { homeTeamId, awayTeamId } = req.body;
+    const allMatches = await this.matchesService.getAllMatchesService(null);
+
+    const homeTeamExist = allMatches.some((match) => match.homeTeamId === homeTeamId);
+    const awayTeamExist = allMatches.some((match) => match.awayTeamId === awayTeamId);
+
+    if (!homeTeamExist || !awayTeamExist) {
+      return res.status(404).json({ message: 'There is no team with such id!' });
+    }
     const createdMatch = await this.matchesService.createMatchService(req.body);
     return res.status(201).json(createdMatch);
   }
