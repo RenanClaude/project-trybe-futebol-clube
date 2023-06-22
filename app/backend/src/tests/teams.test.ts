@@ -13,11 +13,9 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('Team route tests', () => {
   /**
    * Exemplo do uso de stubs com tipos
    */
-
   // let chaiHttpResponse: Response;
 
   // before(async () => {
@@ -36,14 +34,13 @@ describe('Team route tests', () => {
   //   chaiHttpResponse = await chai
   //      .request(app)
   //      ...
-
   //   expect(...)
   // });
-
+describe('Team route tests', () => {
   beforeEach(function () { sinon.restore(); });
+  console.log('At teams.test.ts:', 'To completely simulate the structure that this.model should return, including the dataValues that you try to access, just do a build when mock the value:', 'SequelizeTeams.build(table data)')
 
   it('Should return all teams', async function() {
-    // Para simular a estrutura por completo que o this.model  deveria retornar - incluindo o dataValues que vc tenta acessar - basta fazer um build  ao mockar o valor. (linha abaixo)
     const teamMock = SequelizeTeams.build(team)
     sinon.stub(SequelizeTeams, 'findAll').resolves([teamMock]);
 
@@ -54,7 +51,6 @@ describe('Team route tests', () => {
   });
 
   it('Should return a team by id', async function() {
-    // Para simular a estrutura por completo que o this.model  deveria retornar - incluindo o dataValues que vc tenta acessar - basta fazer um build  ao mockar o valor. (linha abaixo)
     const teamMock = SequelizeTeams.build(team)
     sinon.stub(SequelizeTeams, 'findByPk').resolves(teamMock);
 
