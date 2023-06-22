@@ -5,8 +5,8 @@ export const matchMock = {
   awayTeamId: 8,
   awayTeamGoals: 1,
   inProgress: false,
-  homeTeam: { dataValues: {teamName: 'nome'} },
-  awayTeam: { dataValues: {teamName: 'nome2'} },
+  homeTeam: { dataValues: {teamName: 'Barcelona'} },
+  awayTeam: { dataValues: {teamName: 'Real Madrid'} },
 }
 
 export const matchesMock = [matchMock];
@@ -19,8 +19,8 @@ export const resultMatchMock = [
     awayTeamId: 8,
     awayTeamGoals: 1,
     inProgress: false,
-    homeTeam: { teamName: 'nome' },
-    awayTeam: { teamName: 'nome2' },
+    homeTeam: { teamName: 'Barcelona' },
+    awayTeam: { teamName: 'Real Madrid' },
   }
   ]
 

@@ -9,7 +9,6 @@ import SequelizeMatches from '../database/models/SequelizeMatches';
 import { matchMock, matchesMock, resultMatchMock, reqBodyCreateMatchMock, resultCreateMatchMock } from './mocks/matchesMock';
 import SequelizeUsers from '../database/models/SequelizeUsers';
 import { userDb } from './mocks/usersMocks';
-import Token from '../middlewares/token';
 import { testToken } from './mocks/usersMocks';
 
 chai.use(chaiHttp);
@@ -18,7 +17,6 @@ const { expect } = chai;
 
 describe('Matches route tests', () => {
   beforeEach(() => sinon.restore());
-  console.log('At matches.test.ts:', 'The testToken is the token that the JWT make based on userDb. testToken:', testToken)
 
   it('Should return all matches successfully', async function() {
     sinon.stub(SequelizeMatches, 'findAll').resolves(matchesMock as any);
@@ -43,14 +41,9 @@ describe('Matches route tests', () => {
     // Part 1 - Login and validate token
     const userMock = SequelizeUsers.build(userDb)
     sinon.stub(SequelizeUsers, 'findOne').resolves(userMock);
-
-    const { email } = userDb;
-    const loginData = { email, password: 'secret_admin' }
-
-    const loginResult = await chai.request(app).post('/login').send(loginData);
-
+      // The testToken is the token that the JWT make based on userDb.
     const { status, body } = await chai.request(app).patch('/matches/:id/finish')
-    .set('authorization', loginResult.body.token);;
+    .set('authorization',testToken);;
 
   // Part 2 - Match finalization test
     const match = SequelizeMatches.build(matchMock as any)
@@ -65,7 +58,7 @@ describe('Matches route tests', () => {
     // Part 1 - Login and validate token
     const userMock = SequelizeUsers.build(userDb)
     sinon.stub(SequelizeUsers, 'findOne').resolves(userMock);
-
+      // The testToken is the token that the JWT make based on userDb.
     const { status, body } = await chai.request(app).patch('/matches/:id')
     .set('authorization', testToken);;
 
@@ -83,10 +76,10 @@ describe('Matches route tests', () => {
     const userMock = SequelizeUsers.build(userDb)
     sinon.stub(SequelizeUsers, 'findOne').resolves(userMock);
 
-  // Part 2 - Create a match test
+    // Part 2 - Create a match test
     const match = SequelizeMatches.build(resultCreateMatchMock as any)
     sinon.stub(SequelizeMatches, 'create').resolves(match as any);
-
+      // The testToken is the token that the JWT make based on userDb.
     const { status, body } = await chai.request(app).post('/matches')
     .set('authorization', testToken).send(reqBodyCreateMatchMock);
 

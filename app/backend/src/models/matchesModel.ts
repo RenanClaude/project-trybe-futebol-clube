@@ -14,6 +14,7 @@ export default class MatchesModel {
       ],
       where: inProgressFilter },
     );
+    // console.log('dbData no MatchesModel findAll():', dbData);
     const allMatches = dbData.map((match) => ({
       id: match.id,
       homeTeamId: match.homeTeamId,
@@ -40,14 +41,6 @@ export default class MatchesModel {
     const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = newMatch;
     const dbData = await this.model
       .create({ homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals, inProgress: true });
-    // console.log(dbData.dataValues);
     return dbData.dataValues;
   }
 }
-// const x = new MatchesModel();
-// x.createMatch({
-//   homeTeamId: 14,
-//   awayTeamId: 16,
-//   homeTeamGoals: 3,
-//   awayTeamGoals: 3,
-// });
