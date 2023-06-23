@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import LeaderboardMiddleware from '../middlewares/leaderboardMiddleware';
 import { IMatch } from '../Interfaces/IMatch';
 import MatchesService from '../sevices/matchesService';
 import TeamsService from '../sevices/teamsService';
@@ -91,7 +92,7 @@ export default class LeaderboardAwayController {
     return result;
   }
 
-  public async getAwayTeamsStats() {
+  public async getAwayTeamsStats(req: Request, res: Response) {
     const allTeams = await this.getAllTeamsController();
     const allFinishedMatches = await this.matchesfinishedController();
 
@@ -107,18 +108,7 @@ export default class LeaderboardAwayController {
       goalsBalance: LeaderboardAwayController.getGoalsBalance(team.id, allFinishedMatches),
       efficiency: LeaderboardAwayController.getEfficiency(team.id, allFinishedMatches),
     }));
-    return awayTeamsStats;
-  }
-
-  public async sortedClassification(_req: Request, res: Response) {
-    const awayTeamsStats = await this.getAwayTeamsStats();
-
-    const sortedByGoalsFavor = awayTeamsStats.sort((a, b) => b.goalsFavor - a.goalsFavor);
-    const sortedByGoalsBalance = sortedByGoalsFavor.sort((a, b) => b.goalsBalance - a.goalsBalance);
-    const sortedByVictories = sortedByGoalsBalance
-      .sort((a, b) => b.totalVictories - a.totalVictories);
-    const sortedByPoints = sortedByVictories.sort((a, b) => b.totalPoints - a.totalPoints);
-
-    return res.status(200).json(sortedByPoints);
+    const resultSorted = LeaderboardMiddleware.sortedClassification(req, res, awayTeamsStats);
+    return resultSorted;
   }
 }

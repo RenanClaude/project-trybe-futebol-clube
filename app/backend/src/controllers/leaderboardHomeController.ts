@@ -2,12 +2,14 @@ import { Request, Response } from 'express';
 import { IMatch } from '../Interfaces/IMatch';
 import MatchesService from '../sevices/matchesService';
 import TeamsService from '../sevices/teamsService';
+import LeaderboardMiddleware from '../middlewares/leaderboardMiddleware';
 
 export default class LeaderboardHomeController {
   constructor(
     private teamsService = new TeamsService(),
     private matchesService = new MatchesService(),
-  ) {}
+  ) {
+  }
 
   public async matchesfinishedController() {
     const matchesFinished = await this.matchesService.getAllMatchesService(false);
@@ -91,7 +93,7 @@ export default class LeaderboardHomeController {
     return result;
   }
 
-  public async getHomeTeamsStats() {
+  public async getHomeTeamsStats(req: Request, res: Response) {
     const allTeams = await this.getAllTeamsController();
     const allFinishedMatches = await this.matchesfinishedController();
 
@@ -107,18 +109,7 @@ export default class LeaderboardHomeController {
       goalsBalance: LeaderboardHomeController.getGoalsBalance(team.id, allFinishedMatches),
       efficiency: LeaderboardHomeController.getEfficiency(team.id, allFinishedMatches),
     }));
-    return homeTeamsStats;
-  }
-
-  public async sortedClassification(_req: Request, res: Response) {
-    const homeTeamsStats = await this.getHomeTeamsStats();
-
-    const sortedByGoalsFavor = homeTeamsStats.sort((a, b) => b.goalsFavor - a.goalsFavor);
-    const sortedByGoalsBalance = sortedByGoalsFavor.sort((a, b) => b.goalsBalance - a.goalsBalance);
-    const sortedByVictories = sortedByGoalsBalance
-      .sort((a, b) => b.totalVictories - a.totalVictories);
-    const sortedByPoints = sortedByVictories.sort((a, b) => b.totalPoints - a.totalPoints);
-
-    return res.status(200).json(sortedByPoints);
+    const resultSorted = LeaderboardMiddleware.sortedClassification(req, res, homeTeamsStats);
+    return resultSorted;
   }
 }
