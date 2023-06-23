@@ -19,6 +19,11 @@ export default class LeaderboardAwayController {
     return allTeams;
   }
 
+  static getTotalPoints(teamId: number, allFinishedMatches: IMatch[]) {
+    return (this.getTotalVictories(teamId, allFinishedMatches) * 3)
+         + (this.getTotalDraws(teamId, allFinishedMatches));
+  }
+
   static getTotalGames(teamId: number, allFinishedMatches: IMatch[]) {
     const allMatches = allFinishedMatches.reduce((accumulator, current) => {
       if (current.awayTeamId === teamId) {
@@ -73,21 +78,47 @@ export default class LeaderboardAwayController {
     return allGoalsOwn;
   }
 
-  public async getAwayTeamsStats(_req: Request, res: Response) {
+  static getGoalsBalance(teamId: number, allFinishedMatches: IMatch[]) {
+    const goalsBalance = this.getGoalsFavor(teamId, allFinishedMatches)
+                       - this.getGoalsOwn(teamId, allFinishedMatches);
+    return goalsBalance;
+  }
+
+  static getEfficiency(teamId: number, allFinishedMatches: IMatch[]) {
+    const efficiency = (this.getTotalPoints(teamId, allFinishedMatches)
+       / (this.getTotalGames(teamId, allFinishedMatches) * 3)) * 100;
+    const result = Number.isNaN(efficiency) ? 'No match' : efficiency.toFixed(2);
+    return result;
+  }
+
+  public async getAwayTeamsStats() {
     const allTeams = await this.getAllTeamsController();
     const allFinishedMatches = await this.matchesfinishedController();
 
     const awayTeamsStats = allTeams.map((team) => ({
       name: team.teamName,
-      totalPoints: (LeaderboardAwayController.getTotalVictories(team.id, allFinishedMatches) * 3)
-                 + (LeaderboardAwayController.getTotalDraws(team.id, allFinishedMatches)),
+      totalPoints: LeaderboardAwayController.getTotalPoints(team.id, allFinishedMatches),
       totalGames: LeaderboardAwayController.getTotalGames(team.id, allFinishedMatches),
       totalVictories: LeaderboardAwayController.getTotalVictories(team.id, allFinishedMatches),
       totalDraws: LeaderboardAwayController.getTotalDraws(team.id, allFinishedMatches),
       totalLosses: LeaderboardAwayController.getTotalLosses(team.id, allFinishedMatches),
       goalsFavor: LeaderboardAwayController.getGoalsFavor(team.id, allFinishedMatches),
       goalsOwn: LeaderboardAwayController.getGoalsOwn(team.id, allFinishedMatches),
+      goalsBalance: LeaderboardAwayController.getGoalsBalance(team.id, allFinishedMatches),
+      efficiency: LeaderboardAwayController.getEfficiency(team.id, allFinishedMatches),
     }));
-    return res.status(200).json(awayTeamsStats);
+    return awayTeamsStats;
+  }
+
+  public async sortedClassification(_req: Request, res: Response) {
+    const awayTeamsStats = await this.getAwayTeamsStats();
+
+    const sortedByGoalsFavor = awayTeamsStats.sort((a, b) => b.goalsFavor - a.goalsFavor);
+    const sortedByGoalsBalance = sortedByGoalsFavor.sort((a, b) => b.goalsBalance - a.goalsBalance);
+    const sortedByVictories = sortedByGoalsBalance
+      .sort((a, b) => b.totalVictories - a.totalVictories);
+    const sortedByPoints = sortedByVictories.sort((a, b) => b.totalPoints - a.totalPoints);
+
+    return res.status(200).json(sortedByPoints);
   }
 }

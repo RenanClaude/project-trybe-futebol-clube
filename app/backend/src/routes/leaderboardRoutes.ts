@@ -7,16 +7,16 @@ const leaderboardAwayController = new LeaderboardAwayController();
 
 const router = Router();
 
-// Endpoint - Requisito 23
+// Endpoint - Requisitos 23 e 24
 router.get(
   '/home',
-  (req, res) => leaderboardHomeController.getHomeTeamsStats(req, res),
+  (req, res) => leaderboardHomeController.sortedClassification(req, res),
 );
 
-// Endpoint - Requisito 26
+// Endpoint - Requisito 26 e 27
 router.get(
   '/away',
-  (req, res) => leaderboardAwayController.getAwayTeamsStats(req, res),
+  (req, res) => leaderboardAwayController.sortedClassification(req, res),
 );
 
 export default router;
