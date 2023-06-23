@@ -60,4 +60,4 @@ export const awayTeamMock = {
   teamName: 'Real Madrid',
 }
 
-export const allTeamsMock = [{dataValues: homeTeamMock}, {dataValues: awayTeamMock}]
+export const allTeamsMock = [{dataValues: homeTeamMock}, {dataValues: awayTeamMock}];
