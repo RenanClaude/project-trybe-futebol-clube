@@ -93,7 +93,7 @@ export default class LeaderboardHomeController {
     return result;
   }
 
-  public async getHomeTeamsStats(req: Request, res: Response) {
+  public async getHomeTeamsStats() {
     const allTeams = await this.getAllTeamsController();
     const allFinishedMatches = await this.matchesfinishedController();
 
@@ -109,7 +109,11 @@ export default class LeaderboardHomeController {
       goalsBalance: LeaderboardHomeController.getGoalsBalance(team.id, allFinishedMatches),
       efficiency: LeaderboardHomeController.getEfficiency(team.id, allFinishedMatches),
     }));
-    const resultSorted = LeaderboardMiddleware.sortedClassification(req, res, homeTeamsStats);
-    return resultSorted;
+    return LeaderboardMiddleware.sortedClassification(homeTeamsStats);
+  }
+
+  public async resultHomeTeamsStats(_req: Request, res: Response) {
+    const homeTeamsStats = await this.getHomeTeamsStats();
+    return res.status(200).json(homeTeamsStats);
   }
 }
