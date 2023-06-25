@@ -25,4 +25,5 @@ O Desenvolvimento do projeto foi totalmente focado na criação do <b>Back-End</
 
 <div align="center">
     <img src="https://github.com/RenanClaude/project-trybe-futebol-clube/assets/113383027/66dff8ad-058a-46c8-9cfd-8be19fc0c302" alt="TFC1" />
+    <img src="https://github.com/RenanClaude/project-trybe-futebol-clube/assets/113383027/d3728416-a47e-4b9d-8efe-3b21f6085ddf" alt="TFC2" />
 </div>
