@@ -13,29 +13,6 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-  /**
-   * Exemplo do uso de stubs com tipos
-   */
-  // let chaiHttpResponse: Response;
-
-  // before(async () => {
-  //   sinon
-  //     .stub(Example, "findOne")
-  //     .resolves({
-  //       ...<Seu mock>
-  //     } as Example);
-  // });
-
-  // after(()=>{
-  //   (Example.findOne as sinon.SinonStub).restore();
-  // })
-
-  // it('...', async () => {
-  //   chaiHttpResponse = await chai
-  //      .request(app)
-  //      ...
-  //   expect(...)
-  // });
 describe('Team route tests', () => {
   beforeEach(function () { sinon.restore(); });
   console.log('At teams.test.ts:', 'To completely simulate the structure that this.model should return, including the dataValues that you try to access, just do a build when mock the value:', 'SequelizeTeams.build(table data)')

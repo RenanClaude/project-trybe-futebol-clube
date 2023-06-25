@@ -1,4 +1,3 @@
-// import { Request, Response } from 'express';
 import { ITeamStats } from '../Interfaces/ITeamStats';
 
 export default class LeaderboardMiddleware {
