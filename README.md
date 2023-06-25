@@ -24,5 +24,5 @@ O Desenvolvimento do projeto foi totalmente focado na criação do <b>Back-End</
 #### D – Dependency Inversion Principle (Princípio da inversão da dependência)
 
 <div align="center">
-    <img src="TFC.png" alt="TFC1" width="800px"/>
+    <img src="https://github.com/RenanClaude/project-trybe-futebol-clube/assets/113383027/66dff8ad-058a-46c8-9cfd-8be19fc0c302" alt="TFC1" />
 </div>
