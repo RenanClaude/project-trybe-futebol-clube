@@ -15,7 +15,7 @@ O Desenvolvimento do projeto foi totalmente focado na criação do <b>Back-End</
 - <i><b>[Sinon](https://sinonjs.org/)</b></i><br/>
 - <i><b>[Sequelize](https://sequelize.org/)</b></i><br/>
 
-## Conhecimentos aplicados
+## ✍ Conhecimentos aplicados
 #### Princípios da Programação Orientada a Objetos - Abstração + Encapsulamento + Herança + Polimorfismo
 #### S – Single Responsibility Principle (Princípio da responsabilidade única)
 #### O – Open-Closed Principle (Princípio Aberto-Fechado)
@@ -24,5 +24,5 @@ O Desenvolvimento do projeto foi totalmente focado na criação do <b>Back-End</
 #### D – Dependency Inversion Principle (Princípio da inversão da dependência)
 
 <div align="center">
-    <img src="" alt="Print 1" width="800px"/>
+    <img src="TFC.png" alt="TFC1" width="800px"/>
 </div>
