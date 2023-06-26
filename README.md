@@ -2,7 +2,7 @@
 Esse é um projeto requisitado para a formação na escola de programação Trybe.<br/>
 No diretório `backend`, o `dockerfile`, todo o `src` e sua respectiva estrutura são de minha autoria.<br/>
 Este projeto é uma aplicação Full-Stack de partidas, estatísticas e tabelas de um campeonato de futebol.<br/>
-O Desenvolvimento do projeto foi totalmente focado na criação do <b>Back-End</b>, com o objetivo de alimentar todas as requisições feitas pelo Front-End. 
+O Desenvolvimento do projeto foi focado na criação de uma API RESTful, com o objetivo de alimentar todas as requisições feitas pelo Front-End. 
 
 ## 👨‍💻 Linguagem e Tecnologias utilizadas
 - <i><b>[TypeScript](https://www.typescriptlang.org/)</b></i><br/>
