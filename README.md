@@ -1,7 +1,7 @@
 # <div align="center">⚽ Trybe Futebol Clube 🥅</div>
 Esse é um projeto requisitado para a formação na escola de programação Trybe.<br/>
 No diretório `backend`, o `Dockerfile`, todo o `src` e sua respectiva estrutura são de minha autoria.<br/>
-Esta é uma aplicação back-end, contendo front-end para o funcionamento Full-Stack, e consiste em disponibilizar partidas, estatísticas e tabelas de um campeonato de futebol. A aplicação mostra a classificação dos times na tabela do campeonato, havendo também uma tabela ordenada pela pontuação de partidas jogadas em casa, e outra ordenada por partidas jogadas como visitante. Também é possível inserir, editar e remover partidas. A aplicação contém cadstro e login.<br/>
+Esta é uma aplicação back-end, contendo front-end para o funcionamento Full-Stack. Trata-se de uma API REST com o propósito de disponibilizar partidas, estatísticas e tabelas de um campeonato de futebol. A aplicação mostra a classificação dos times na tabela do campeonato, havendo também uma tabela ordenada pela pontuação de partidas jogadas em casa, e outra ordenada por partidas jogadas como visitante. Também é possível inserir, editar e remover partidas. A aplicação contém cadstro e login.<br/>
 O Desenvolvimento do projeto foi focado na criação de uma API REST, com o objetivo de alimentar todas as requisições feitas pelo Front-End. 
 
 ## 👨‍💻 Linguagem e Tecnologias utilizadas
